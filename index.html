@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Hospital home</title>
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- normalize css -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    
+
+
+    <!-- header -->
+    <header class="header bg-blue">
+        <nav class="navbar bg-blue">
+            <div class="container flex">
+                <a href="index.html" class="navbar-brand">
+                    <img src="images/logo.png" alt="Revo Hospital Logo">
+                </a>
+                <button type="button" class="navbar-show-btn">
+                    <img src="images/ham-menu-icon.png" alt="Menu">
+                </button>
+
+                <div class="navbar-collapse bg-white">
+                    <button type="button" class="navbar-hide-btn">
+                        <img src="images/close-icon.png" alt="Close">
+                    </button>
+                    <ul class="navbar-nav">
+                        <!-- Home → Login page -->
+                        <li class="nav-item"><a href="login.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="ambulance_booking.html" class="nav-link">Ambulance</a></li>
+                        <li class="nav-item"><a href="service.html" class="nav-link">Service</a></li>
+                        <li class="nav-item"><a href="doctor.html" class="nav-link">Doctors</a></li>
+                        <li class="nav-item"><a href="departments.html" class="nav-link">Departments</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                    
+                    <div class="search-bar">
+                        <form>
+                            <div class="search-bar-box flex">
+                                <span class="search-icon flex">
+                                    <img src="images/search-icon-dark.png" alt="Search">
+                                </span>
+                                <input type="search" class="search-control" placeholder="Search here">
+                            </div>
+                        </form>
+                    </div>
+                </div> 
+            </div>
+        </nav>
+
+        <div class="header-inner text-white text-center">
+            <div class="container grid">
+                <div class="header-inner-left">
+                    <h1>Your most trusted<br> <span>health partner</span></h1>
+                    <p class="lead">The best match services for you</p>
+                    <p class="text text-md">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam, nulla odit esse necessitatibus corporis voluptatem?</p>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-white">Learn More</a>
+                        <!-- Sign in → Login page -->
+                        <a href="login.html" class="btn btn-light-blue">Sign In</a>
+                    </div>
+                </div>
+                <div class="header-inner-right">
+                    <img src="images/header.png" alt="Header Image">
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end of header -->
+
+    <main>
+        <!-- about section -->
+        <section id="about" class="about py">
+            <div class="about-inner">
+                <div class="container grid">
+                    <div class="about-left text-center">
+                        <div class="section-head">
+                            <h2>About Us</h2>
+                            <div class="border-line"></div>
+                        </div>
+                        <p class="text text-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae molestias delectus facilis, temporibus eum consectetur, a debitis exercitationem quae distinctio aliquid ea ipsam vitae esse amet soluta maxime dolorem?</p>
+                        <a href="#" class="btn btn-white">Learn More</a>
+                    </div>
+                    <div class="about-right flex">
+                        <div class="img">
+                            <img src="images/about-img.png" alt="About Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end of about section -->
+
+        <!-- banner one -->
+        <section id="banner-one" class="banner-one text-center">
+            <div class="container text-white">
+                <blockquote class="lead"><i class="fas fa-quote-left"></i> When you are young and healthy, it never occurs to you that in a single second your whole life could change. <i class="fas fa-quote-right"></i></blockquote>
+                <small class="text text-sm">- Anonim Nano</small>
+            </div>
+        </section>
+        <!-- end of banner one -->
+
+        <!-- services section -->
+        <section id="services" class="services py">
+            <div class="container">
+                <div class="section-head text-center">
+                    <h2 class="lead">The Best Doctor gives the least medicines</h2>
+                    <p class="text text-lg">A perfect way to show your hospital services</p>
+                    <div class="line-art flex">
+                        <div></div>
+                        <img src="images/4-dots.png" alt="">
+                        <div></div>
+                    </div>
+                </div>
+                <div class="services-inner text-center grid">
+                    <article class="service-item">
+                        <div class="icon">
+                            <img src="images/service-icon-1.png" alt="">
+                        </div>
+                        <h3>Cardio Monitoring</h3>
+                        <p class="text text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis possimus doloribus facilis velit, assumenda tempora quas mollitia quos voluptatibus consequatur!</p>
+                    </article>
+
+                    <article class="service-item">
+                        <div class="icon">
+                            <img src="images/service-icon-2.png" alt="">
+                        </div>
+                        <h3>Medical Treatment</h3>
+                        <p class="text text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis possimus doloribus facilis velit, assumenda tempora quas mollitia quos voluptatibus consequatur!</p>
+                    </article>
+
+                    <article class="service-item">
+                        <div class="icon">
+                            <img src="images/service-icon-3.png" alt="">
+                        </div>
+                        <h3>Emergency Help</h3>
+                        <p class="text text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis possimus doloribus facilis velit, assumenda tempora quas mollitia quos voluptatibus consequatur!</p>
+                    </article>
+
+                    <article class="service-item">
+                        <div class="icon">
+                            <img src="images/service-icon-4.png" alt="">
+                        </div>
+                        <h3>First Aid</h3>
+                        <p class="text text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis possimus doloribus facilis velit, assumenda tempora quas mollitia quos voluptatibus consequatur!</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <!-- end of services section -->
+
+        <!-- doctors section -->
+        <section id="doc-panel" class="doc-panel py">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Our Doctor Panel</h2>
+                </div>
+
+                <div class="doc-panel-inner grid">
+                    <div class="doc-panel-item">
+                        <div class="img flex">
+                            <img src="images/doc-1.png" alt="Doctor Nevil Fernando">
+                            <div class="info text-center bg-blue text-white flex">
+                                <p class="lead">Nevil Fernando</p>
+                                <p class="text-lg">Medicine</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="doc-panel-item">
+                        <div class="img flex">
+                            <img src="images/doc-2.png" alt="Doctor Elizabeth Ira">
+                            <div class="info text-center bg-blue text-white flex">
+                                <p class="lead">Elizabeth Ira</p>
+                                <p class="text-lg">Cardiology</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="doc-panel-item">
+                        <div class="img flex">
+                            <img src="images/doc-3.png" alt="Doctor Tanya Collins">
+                            <div class="info text-center bg-blue text-white flex">
+                                <p class="lead">Tanya Collins</p>
+                                <p class="text-lg">Medicine</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end of doctors section -->
+
+        <!-- contact section -->
+        <section id="contact" class="contact py">
+            <div class="container grid">
+                <div class="contact-left">
+                    <!-- Fixed map link -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.473892108394!2d79.96094697434503!3d6.921317719692981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2574c5a5d89b1%3A0x9d1ed41d9b86d77a!2sNevil%20Fernando%20Teaching%20Hospital!5e0!3m2!1sen!2slk!4v1693828790643!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <div class="contact-right text-white text-center bg-blue">
+                    <div class="contact-head">
+                        <h3 class="lead">Contact Us</h3>
+                        <p class="text text-md">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga.</p>
+                    </div>
+                    <form>
+                        <div class="form-element">
+                            <input type="text" class="form-control" placeholder="Your name">
+                        </div>
+                        <div class="form-element">
+                            <input type="email" class="form-control" placeholder="Your email">
+                        </div>
+                        <div class="form-element">
+                            <textarea rows="5" placeholder="Your Message" class="form-control"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-white btn-submit">
+                            <i class="fas fa-arrow-right"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <!-- end of contact section -->
+    </main>
+
+    <!-- footer -->
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <div class="footer-inner text-white py grid">
+                <div class="footer-item">
+                    <h3 class="footer-head">about us</h3>
+                    <div class="icon">
+                        <img src="images/logo.png" alt="SBI Hospital Logo">
+                    </div>
+                    <p class="text text-md">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis saepe incidunt fugiat optio corporis ea!</p>
+                    <address>
+                        Revo Hospital <br>
+                        Welivitta Rd, Malabe <br>
+                        Colombo <br>
+                        Sri Lanka
+                    </address>
+                </div>
+
+                <div class="footer-item">
+                    <h3 class="footer-head">tags</h3>
+                    <ul class="tags-list flex">
+                        <li>medical care</li>
+                        <li>emergency</li>
+                        <li>therapy</li>
+                        <li>surgery</li>
+                        <li>medication</li>
+                        <li>nurse</li>
+                    </ul>
+                </div>
+
+                <div class="footer-item">
+                    <h3 class="footer-head">Quick Links</h3>
+                    <ul>
+                        <li><a href="#" class="text-white">Our Services</a></li>
+                        <li><a href="#" class="text-white">Our Plan</a></li>
+                        <li><a href="#" class="text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-white">Appointment Schedule</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-item">
+                    <h3 class="footer-head">make an appointment</h3>
+                    <p class="text text-md">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, omnis.</p>
+                    <ul class="appointment-info">
+                        <li>8:00 AM - 11:00 AM</li>
+                        <li>2:00 PM - 05:00 PM</li>
+                        <li>8:00 PM - 11:00 PM</li>
+                        <li><i class="fas fa-envelope"></i> <span>sabrimedic@gmail.com</span></li>
+                        <li><i class="fas fa-phone"></i> <span>+94778408924</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <ul class="flex">
+                    <li><a href="#" class="text-white flex"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#" class="text-white flex"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#" class="text-white flex"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!-- end of footer -->
+
+    <!-- custom js -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>

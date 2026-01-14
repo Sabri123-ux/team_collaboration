@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Appointment - International Style</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background-color: #f5f7fa;
+        color: #333;
+    }
+    nav {
+        background-color: #0050d5;
+        color: #fff;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    nav a {
+        color: #fff;
+        text-decoration: none;
+        margin-left: 1rem;
+        font-weight: 500;
+    }
+    .section-head h2 {
+        text-align: center;
+        color: #0050d5;
+        margin-top: 2rem;
+        font-size: 3rem;
+    }
+    .department-tabs {
+        display: flex;
+        justify-content: center;
+        margin: 2rem 0;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    .department-tabs button {
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 2rem;
+        cursor: pointer;
+        background-color: #e0e6f5;
+        color: #0050d5;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+    .department-tabs button.active {
+        background-color: #0050d5;
+        color: #fff;
+    }
+    .doctor-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        padding: 0 2rem;
+    }
+    .doctor-card {
+        background: #fff;
+        border-radius: 1rem;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        overflow: hidden;
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.3s;
+        padding-bottom: 1rem;
+    }
+    .doctor-card img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+    .doctor-card h3 {
+        margin: 1rem 0 0.5rem;
+        font-size: 1.4rem;
+        color: #0050d5;
+    }
+    .doctor-card p {
+        margin: 0.3rem 0;
+        font-size: 1rem;
+        color: #555;
+    }
+    .doctor-card.active {
+        transform: scale(1.05);
+        border: 2px solid #16c5ff;
+    }
+    .booking-form {
+        max-width: 600px;
+        margin: 3rem auto;
+        background: #fff;
+        padding: 2rem;
+        border-radius: 1.2rem;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .booking-form label {
+        display: block;
+        margin-top: 1rem;
+        margin-bottom: .5rem;
+        font-weight: 500;
+    }
+    .booking-form input, .booking-form select {
+        width: 100%;
+        padding: 0.8rem;
+        border-radius: .6rem;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+    }
+    .booking-form button {
+        margin-top: 2rem;
+        background-color: #0050d5;
+        color: #fff;
+        border: none;
+        padding: 1rem 0;
+        width: 100%;
+        border-radius: 2rem;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    .booking-form button:hover {
+        background-color: #16c5ff;
+    }
+    .success-message {
+        display: none;
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 1.2rem;
+        color: #28a745;
+        font-weight: 500;
+    }
+</style>
+</head>
+<body>
+<nav>
+    <div class="logo">Hospital</div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="department.html">Departments</a>
+        <a href="booking.html">Book Appointment</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">login</a>    </div>
+</nav>
+
+<div class="section-head">
+    <h2>Book Your Appointment</h2>
+</div>
+
+<div class="department-tabs">
+    <button class="tab active" data-dept="All">All</button>
+    <button class="tab" data-dept="Cardiology">Cardiology</button>
+    <button class="tab" data-dept="Medicine">Medicine</button>
+    <button class="tab" data-dept="Emergency">Emergency</button>
+    <button class="tab" data-dept="First Aid">First Aid</button>
+</div>
+
+<div class="doctor-cards" id="doctorCards">
+    <!-- Doctor cards dynamically added by JS -->
+</div>
+
+<div class="booking-form">
+    <h3>Appointment Form</h3>
+    <form id="appointmentForm" action="book_appointment.php" method="post">
+
+        <input type="hidden" id="selectedDoctor" name="doctor" required>
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required>
+        <label for="time">Time</label>
+        <select id="time" name="time" required>
+            <option value="">Select Time</option>
+            <option value="09:00 AM">09:00 AM</option>
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+            <option value="01:00 PM">01:00 PM</option>
+            <option value="02:00 PM">02:00 PM</option>
+            <option value="03:00 PM">03:00 PM</option>
+        </select>
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone" required>
+        <button type="submit">Book Appointment</button>
+    </form>
+    <div class="success-message" id="successMessage">Your appointment is successfully booked!</div>
+</div>
+
+<script>
+const doctors = [
+    {name: "Nevil Fernando", dept:"Medicine", img:"images/doc-1.png"},
+    {name: "Elizabeth Ira", dept:"Cardiology", img:"images/doc-2.png"},
+    {name: "Tanya Collins", dept:"Medicine", img:"images/doc-3.png"},
+    {name: "Dr. John Smith", dept:"Emergency", img:"images/doc-4.webp"},
+    {name: "Dr. Alice Brown", dept:"First Aid", img:"images/doc-5.webp"},
+    {name: "Dr. Emily Davis", dept:"Pediatrics", img:"images/doc-11.jpeg"},
+    {name: "Dr. Mark Lee", dept:"Orthopedics", img:"images/doc-7.webp"},
+    {name: "Dr. Michael Ross", dept:"Neurology", img:"images/doc-8.jpeg"}
+];
+
+const doctorCards = document.getElementById('doctorCards');
+const selectedDoctorInput = document.getElementById('selectedDoctor');
+function showDoctors(dept="All"){
+    doctorCards.innerHTML = "";
+    doctors.filter(d=> dept=="All" || d.dept==dept).forEach(d=>{
+        const card = document.createElement('div');
+        card.className = "doctor-card";
+        card.innerHTML = `<img src="${d.img}" alt="${d.name}">
+                          <h3>${d.name}</h3>
+                          <p>${d.dept}</p>`;
+        card.addEventListener('click', ()=>{
+            document.querySelectorAll('.doctor-card').forEach(c=>c.classList.remove('active'));
+            card.classList.add('active');
+            selectedDoctorInput.value = d.name;
+        });
+        doctorCards.appendChild(card);
+    });
+}
+
+// Initial load
+showDoctors();
+
+// Department tabs filter
+document.querySelectorAll('.department-tabs button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.department-tabs button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        showDoctors(btn.dataset.dept);
+    });
+});
+
+// Form submission
+const form = document.getElementById('appointmentForm');
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    if(!selectedDoctorInput.value){
+        alert("Please select a doctor.");
+        return;
+    }
+
+    // Prepare form data
+    const formData = new FormData(form);
+
+    // Send form data to PHP backend
+    fetch('book_appointment.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if(data.trim() === 'success'){
+            document.getElementById('successMessage').style.display = 'block';
+            form.reset();
+            document.querySelectorAll('.doctor-card').forEach(c => c.classList.remove('active'));
+        } else {
+            alert('Something went wrong! ' + data);
+        }
+    });
+});
+</script>
+</body>
+</html>
+

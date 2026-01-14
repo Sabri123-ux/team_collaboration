@@ -1,0 +1,97 @@
+/* --- Home Hero Image --- */
+.header-inner-right img {
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+/* --- Services & Departments Cards --- */
+.service-item, .doc-panel-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.service-item:hover, .doc-panel-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+/* --- Doctors Info slide-up --- */
+.doc-panel-item .info {
+    transition: bottom 0.4s ease;
+}
+
+.doc-panel-item:hover .info {
+    bottom: 0;
+}
+
+/* --- Contact Form Styling --- */
+.contact-right form .form-control {
+    border-radius: 1rem;
+    padding: 1.2rem 1.6rem;
+    font-size: 1.5rem;
+}
+
+.btn-submit {
+    padding: 1.2rem 2rem;
+    border-radius: 2rem;
+}
+
+/* --- Footer --- */
+.footer {
+    padding: 4rem 0;
+}
+
+.footer-item h3 {
+    font-size: 2rem;
+}
+/* Doctor Preview Section */
+.doctor-preview{
+    padding: 8rem 2rem;
+    text-align: center;
+}
+.doctor-preview h2{
+    font-size: 4rem;
+    color: #0050d5;
+    margin-bottom: 4rem;
+}
+.doctor-cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    justify-items: center;
+}
+.doctor-card{
+    background-color: #fff;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 300px;
+}
+.doctor-card img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.doctor-card h3{
+    font-size: 2rem;
+    color: #202020;
+    margin: 1.5rem 0 0.5rem 0;
+}
+.doctor-card p{
+    font-size: 1.5rem;
+    color: #16c5ff;
+    margin-bottom: 1.5rem;
+}
+
+/* Hover Effect */
+.doctor-card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+}
+.doctor-card:hover img{
+    transform: scale(1.05);
+}

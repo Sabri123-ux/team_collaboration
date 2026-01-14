@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departments - Modern Hospital</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Modern department cards */
+        .department-section{
+            padding: 10rem 0;
+            background-color: #f9f9f9;
+        }
+        .section-head h2{
+            font-size: 4rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #0050d5;
+        }
+        .department-cards{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            padding-top: 4rem;
+        }
+        .department-card{
+            background-color: #fff;
+            border-radius: 1.2rem;
+            overflow: hidden;
+            -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        .department-card:hover{
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .department-card i{
+            font-size: 4rem;
+            color: #16c5ff;
+            margin-bottom: 2rem;
+        }
+        .department-card h3{
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #202020;
+        }
+        .department-card p{
+            font-size: 1.4rem;
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .department-card .btn{
+            background-color: #0050d5;
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            transition: background-color 0.3s;
+        }
+        .department-card .btn:hover{
+            background-color: #16c5ff;
+            color: #fff;
+        }
+        @media(max-width:768px){
+            .section-head h2{
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar bg-blue text-white">
+        <div class="container flex">
+            <a href="index.html" class="navbar-brand text-white">Hospital</a>
+            <ul class="navbar-nav flex">
+                <li class="nav-item"><a href="index.html" class="nav-link text-white">Home</a></li>
+                <li class="nav-item"><a href="departments.html" class="nav-link text-white">Departments</a></li>
+                <li class="nav-item"><a href="booking.html" class="nav-link text-white">Book Appointment</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link text-white">Contact</a></li>
+                <li class="nav-item"><a href="login.html" class="nav-link text-white">Login</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Departments Section -->
+    <section class="department-section">
+        <div class="container">
+            <div class="section-head">
+                <h2>Our Hospital Departments</h2>
+            </div>
+
+            <div class="department-cards">
+                <!-- Cardiology -->
+                <div class="department-card">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Cardiology</h3>
+                    <p>Heart care and monitoring using the latest technology with top cardiologists.</p>
+                    <a href="booking.html?department=Cardiology" class="btn">Book Appointment</a>
+                </div>
+
+                <!-- Medicine -->
+                <div class="department-card">
+                    <i class="fas fa-pills"></i>
+                    <h3>General Medicine</h3>
+                    <p>Comprehensive medical care and treatments for various general illnesses.</p>
+                    <a href="booking.html?department=Medicine" class="btn">Book Appointment</a>
+                </div>
+
+                <!-- Emergency -->
+                <div class="department-card">
+                    <i class="fas fa-ambulance"></i>
+                    <h3>Emergency</h3>
+                    <p>24/7 emergency care for urgent cases with rapid response medical staff.</p>
+                    <a href="booking.html?department=Emergency" class="btn">Book Appointment</a>
+                </div>
+
+                <!-- First Aid -->
+                <div class="department-card">
+                    <i class="fas fa-first-aid"></i>
+                    <h3>First Aid</h3>
+                    <p>Quick treatment for minor injuries and immediate first aid assistance.</p>
+                    <a href="booking.html?department=First%20Aid" class="btn">Book Appointment</a>
+                </div>
+
+                <!-- Pediatrics -->
+                <div class="department-card">
+                    <i class="fas fa-baby"></i>
+                    <h3>Pediatrics</h3>
+                    <p>Specialized care for children and newborns by experienced pediatricians.</p>
+                    <a href="booking.html?department=Pediatrics" class="btn">Book Appointment</a>
+                </div>
+
+                <!-- Orthopedics -->
+                <div class="department-card">
+                    <i class="fas fa-bone"></i>
+                    <h3>Orthopedics</h3>
+                    <p>Treatment and rehabilitation for bone, joint, and muscular issues.</p>
+                    <a href="booking.html?department=Orthopedics" class="btn">Book Appointment</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+

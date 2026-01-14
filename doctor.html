@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctor Panel & Appointment</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+    --fros-blue-color: #0050d5;
+    --light-blue-color: #16c5ff;
+    --dark-color: #202020;
+    --light-gray: #dedede;
+    --light-color: #fff;
+    --poppins-font: 'Poppins', sans-serif;
+    --transition: all 0.3s ease-in-out;
+    --box-shadow: 0 0 15px 2px rgba(0,0,0,0.2)!important;
+}
+*{padding:0;margin:0;box-sizing:border-box;}
+body{font-family:var(--poppins-font);line-height:1.6;font-size:16px;color:var(--dark-color);}
+img{width:100%;display:block;}
+.container{max-width:1200px;margin:0 auto;padding:2rem;}
+.flex{display:flex;align-items:center;justify-content:center;}
+.text-center{text-align:center;}
+.btn{padding:0.9rem 2rem;border-radius:3rem;border:none;cursor:pointer;background-color:var(--fros-blue-color);color:#fff;font-weight:500;box-shadow:0 0 7px 2px rgba(0,0,0,0.2);transition:var(--transition);}
+.btn:hover{box-shadow:var(--box-shadow);}
+.doc-panel-inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:3rem;}
+.doc-panel-item{position:relative;cursor:pointer;transition:var(--transition);}
+.doc-panel-item .img{position:relative;overflow:hidden;border-radius:1rem;}
+.doc-panel-item img{width:100%;border-radius:1rem;transition:transform 0.3s;}
+.doc-panel-item:hover img{transform:scale(1.05);}
+.doc-panel-item .info{position:absolute;bottom:0;left:0;width:100%;background-color:var(--fros-blue-color);color:#fff;text-align:center;padding:1rem;transition:bottom 0.3s;}
+.appointment-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:9999;}
+.appointment-content{background:#fff;padding:2rem;border-radius:1rem;max-width:500px;width:90%;position:relative;}
+.close-btn{position:absolute;top:1rem;right:1rem;font-size:2rem;cursor:pointer;}
+.appointment-content input, .appointment-content select{width:100%;padding:1rem;margin-bottom:1.2rem;border-radius:0.8rem;border:1px solid #ccc;font-size:1rem;}
+.success-message{text-align:center;display:none;padding:2rem;}
+</style>
+</head>
+<body>
+
+<!-- Doctor Panel -->
+<section id="doc-panel" class="doc-panel py">
+    <div class="container">
+        <div class="text-center">
+            <h2>Our Doctor Panel</h2>
+        </div>
+        <div class="doc-panel-inner">
+            <div class="doc-panel-item" onclick="openAppointment('Nevil Fernando','Medicine')">
+                <div class="img">
+                    <img src="images/doc-1.png" alt="Doctor Nevil Fernando">
+                    <div class="info">
+                        <p class="lead">Nevil Fernando</p>
+                        <p class="text-lg">Medicine</p>
+                    </div>
+                </div>
+            </div>
+            <div class="doc-panel-item" onclick="openAppointment('Elizabeth Ira','Cardiology')">
+                <div class="img">
+                    <img src="images/doc-2.png" alt="Doctor Elizabeth Ira">
+                    <div class="info">
+                        <p class="lead">Elizabeth Ira</p>
+                        <p class="text-lg">Cardiology</p>
+                    </div>
+                </div>
+            </div>
+            <div class="doc-panel-item" onclick="openAppointment('Tanya Collins','Medicine')">
+                <div class="img">
+                    <img src="images/doc-3.png" alt="Doctor Tanya Collins">
+                    <div class="info">
+                        <p class="lead">Tanya Collins</p>
+                        <p class="text-lg">Medicine</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Appointment Modal -->
+<div id="appointmentModal" class="appointment-modal flex">
+    <div class="appointment-content">
+        <span class="close-btn" onclick="closeAppointment()">&times;</span>
+        <h2>Book Appointment with <span id="doctorName"></span> (<span id="doctorSpecialty"></span>)</h2>
+        <form id="appointmentForm" action="book_appointment.php" method="POST">
+            <!-- hidden doctor name -->
+            <input type="hidden" id="doctorField" name="doctor">
+
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="tel" name="phone" placeholder="Your Phone" required>
+            <input type="date" name="date" required>
+            <select id="timeSlot" name="time" required></select>
+            <button type="submit" class="btn">Book Appointment</button>
+        </form>
+        <div id="successMessage" class="success-message">
+            <h3>✅ Your appointment is done!</h3>
+            <p>We will contact you soon.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+const doctorAvailability = {
+    "Nevil Fernando": ["09:00 AM", "10:00 AM", "02:00 PM", "03:00 PM"],
+    "Elizabeth Ira": ["10:00 AM", "11:00 AM", "01:00 PM", "04:00 PM"],
+    "Tanya Collins": ["08:30 AM", "09:30 AM", "12:00 PM", "03:30 PM"]
+};
+
+function openAppointment(doctor, specialty){
+    document.getElementById('doctorName').innerText = doctor;
+    document.getElementById('doctorSpecialty').innerText = specialty;
+
+    // set doctor hidden field value
+    document.getElementById('doctorField').value = doctor;
+
+    const timeSelect = document.getElementById('timeSlot');
+    timeSelect.innerHTML = "";
+    doctorAvailability[doctor].forEach(time=>{
+        const option = document.createElement('option');
+        option.value = time;
+        option.text = time;
+        timeSelect.appendChild(option);
+    });
+    document.getElementById('appointmentModal').style.display = 'flex';
+    document.getElementById('successMessage').style.display = 'none';
+    document.getElementById('appointmentForm').style.display = 'block';
+}
+
+function closeAppointment(){
+    document.getElementById('appointmentModal').style.display = 'none';
+}
+</script>
+
+</body>
+</html>

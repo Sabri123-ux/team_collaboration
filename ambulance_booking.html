@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>International Ambulance Booking</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+  background: linear-gradient(135deg, #0050d5, #16c5ff);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:2rem;
+}
+.container{
+  max-width:900px;
+  width:100%;
+  padding:2rem;
+  background:rgba(255,255,255,0.15);
+  border-radius:1.5rem;
+  box-shadow:0 10px 40px rgba(0,0,0,0.2);
+  backdrop-filter: blur(12px);
+  animation: fadeIn 1.2s ease;
+}
+h2{
+  text-align:center;
+  color:#fff;
+  margin-bottom:1.5rem;
+  font-size:2rem;
+  font-weight:700;
+}
+form{display:grid;gap:1.5rem;}
+.form-group{
+  position:relative;
+}
+input, textarea{
+  width:100%;
+  padding:1rem;
+  border-radius:0.8rem;
+  border:2px solid transparent;
+  outline:none;
+  font-size:1rem;
+  background:rgba(255,255,255,0.8);
+  transition:0.3s;
+}
+input:focus, textarea:focus{
+  border-color:#0050d5;
+  background:#fff;
+}
+label{
+  position:absolute;
+  top:50%;
+  left:1rem;
+  transform:translateY(-50%);
+  color:#666;
+  pointer-events:none;
+  transition:0.3s;
+}
+input:focus + label,
+input:not(:placeholder-shown) + label,
+textarea:focus + label,
+textarea:not(:placeholder-shown) + label{
+  top:-10px;
+  left:0.8rem;
+  font-size:0.8rem;
+  color:#0050d5;
+  background:#fff;
+  padding:0 0.3rem;
+  border-radius:0.3rem;
+}
+textarea{resize:none;min-height:80px;}
+#map{
+  height:300px;
+  width:100%;
+  border-radius:1rem;
+  margin-bottom:1rem;
+  box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+button{
+  background:#0050d5;
+  color:#fff;
+  padding:1rem;
+  border:none;
+  border-radius:0.8rem;
+  font-size:1.1rem;
+  cursor:pointer;
+  transition:0.3s;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+button:hover{background:#16c5ff;}
+button.loading{
+  pointer-events:none;
+  opacity:0.7;
+}
+button.loading::after{
+  content:"";
+  margin-left:10px;
+  width:18px;
+  height:18px;
+  border:3px solid #fff;
+  border-radius:50%;
+  border-top-color:transparent;
+  animation: spin 1s linear infinite;
+}
+.success-message{
+  display:none;
+  background:#16c5ff;
+  color:#fff;
+  padding:1rem;
+  text-align:center;
+  border-radius:0.8rem;
+  margin-top:1rem;
+  font-weight:600;
+  animation: fadeIn 1s ease;
+}
+.ambulance-pic{
+  display:block;
+  margin:0 auto 1rem auto;
+  width:220px;
+  height:auto;
+  border-radius:1rem;
+  box-shadow:0 5px 20px rgba(0,0,0,0.2);
+  transition: transform 0.4s ease;
+}
+.ambulance-pic:hover{transform:scale(1.05);}
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🚑 Ambulance Booking</h2>
+
+    <!-- Ambulance Image -->
+    <img src="images/amb.webp" alt="Ambulance" class="ambulance-pic">
+
+    <form id="ambulanceForm" enctype="multipart/form-data">
+        <div class="form-group">
+          <input type="text" name="patient_name" id="patient_name" placeholder=" " required>
+          <label for="patient_name">Patient Name</label>
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" id="email" placeholder=" " required>
+          <label for="email">Email</label>
+        </div>
+        <div class="form-group">
+          <input type="tel" name="phone" id="phone" placeholder=" " required>
+          <label for="phone">Phone Number</label>
+        </div>
+        <div class="form-group">
+          <textarea name="location" id="locationInput" placeholder=" " required></textarea>
+          <label for="locationInput">Your Location </label>
+        </div>
+
+        <!-- Google Map for marking location -->
+        <div id="map"></div>
+
+        <label style="color:#fff;"></label>
+        <input type="file" name="ambulance_image" accept="image/*" required>
+
+        <button type="submit">Book Ambulance</button>
+    </form>
+    <div id="successMessage" class="success-message">
+        ✅ Ambulance request submitted! Help is on the way.
+    </div>
+</div>
+
+<script>
+let map, marker;
+function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 7.8731, lng: 80.7718 }, // Sri Lanka
+        zoom: 7,
+        disableDefaultUI: true,   // 🚫 remove all map options/controls
+        draggable: true,          // keep dragging allowed
+        scrollwheel: true,        // allow scroll zoom if needed
+    });
+
+    // Click on map to mark location
+    map.addListener("click", (e) => {
+        const latLng = e.latLng;
+        if(marker) marker.setMap(null);
+        marker = new google.maps.Marker({
+            position: latLng, 
+            map: map, 
+            animation: google.maps.Animation.DROP
+        });
+        document.getElementById("locationInput").value = latLng.lat() + "," + latLng.lng();
+    });
+}
+
+// AJAX form submission
+document.getElementById('ambulanceForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const formData = new FormData(this);
+    const submitBtn = this.querySelector("button");
+    submitBtn.classList.add("loading");
+
+    fetch('ambulance_submit.php', {
+        method:'POST',
+        body: formData
+    })
+    .then(res => res.text())
+    .then(data => {
+        submitBtn.classList.remove("loading");
+        if(data.trim() === 'success'){
+            this.reset();
+            if(marker) marker.setMap(null);
+            document.getElementById('successMessage').style.display = 'block';
+            setTimeout(()=>document.getElementById('successMessage').style.display="none",5000);
+        } else {
+            alert('❌ Error: ' + data);
+        }
+    });
+});
+</script>
+
+<!-- Google Maps API -->
+<script src="http://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.0000000000005!2d79.945!3d6.903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae259a5f2e8b000%3A0x1234567890abcdef!2sMalabe%20Hospital!5e0!3m2!1sen!2slk!4v1234567890123!5m2!1sen!2slk" async defer></script>
+</body>
+</html>
